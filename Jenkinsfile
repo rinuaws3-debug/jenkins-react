@@ -1,13 +1,12 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds-id') // add in Jenkins
-        DOCKER_IMAGE = "your-dockerhub-username/my-app-jenkin-react"
+        DOCKER_IMAGE = "rinuaws3-debug/jenkins-react" // your DockerHub repo
     }
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/<your-user>/<your-repo>.git'
+                git branch: 'main', url: 'https://github.com/rinuaws3-debug/jenkins-react.git'
             }
         }
         stage('Install & Build') {
@@ -23,7 +22,8 @@ pipeline {
         }
         stage('Docker Push') {
             steps {
-                withDockerRegistry([credentialsId: 'dockerhub-creds-id']) {
+                // use your credential ID here
+                withDockerRegistry([credentialsId: 'cd53a2fd-db57-4350-b1d8-b280cf86ef55', url: '']) {
                     sh 'docker push $DOCKER_IMAGE:$BUILD_NUMBER'
                 }
             }
