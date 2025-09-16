@@ -1,14 +1,23 @@
-# Stage 1 – Build
-FROM node:18 AS build
+# ---- Build stage ----
+FROM node:20-alpine AS build
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm ci --no-audit --no-fund
 COPY . .
+# For Vite/CRA ensure the right build command:
+# If Vite:
 RUN npm run build
+# If CRA:
+# RUN npm run build
 
-# Stage 2 – Serve
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
+# ---- Runtime stage ----
+FROM nginx:stable-alpine
+# Replace default nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy built static files
+COPY --from=build /app/dist /usr/share/nginx/html
+# (For CRA, output is /app/build instead of /app/dist)
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD wget -qO- http://localhost/ || exit 1
 
