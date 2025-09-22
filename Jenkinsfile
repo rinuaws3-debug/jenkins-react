@@ -41,7 +41,7 @@ pipeline {
             steps {
                 sh '''
                   docker rm -f myapp || true
-                  docker run -d -p 80:80 --name myapp $DOCKER_IMAGE:$BUILD_NUMBER
+                  docker run -d -p 8081:80 --name myapp $DOCKER_IMAGE:$BUILD_NUMBER
                 '''
             }
         }
