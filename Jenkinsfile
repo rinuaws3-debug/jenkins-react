@@ -8,7 +8,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/rinuaws-debug/jenkins-react.git'
+                git branch: 'main',
+                     url: 'https://github.com/rinuaws-debug/jenkins-react.git',
+                     credentialsId: 'github-cred'               
             }
         }
 
