@@ -23,8 +23,10 @@ pipeline {
         stage('Docker Push') {
             steps {
                 // use your credential ID here
-                withDockerRegistry([credentialsId: 'cd53a2fd-db57-4350-b1d8-b280cf86ef55', url: '']) {
-                    sh 'docker push $DOCKER_IMAGE:$BUILD_NUMBER'
+                withDockerRegistry([credentialsId: 'dockerhub-cred', url: '']) {
+                     docker.image("$DOCKERHUB_REPO:latest").push()
+                }
+
                 }
             }
         }
@@ -36,4 +38,3 @@ pipeline {
         }
     }
 }
-
