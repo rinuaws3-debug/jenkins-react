@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "rinuaws3-debug/jenkins-react" // your DockerHub repo
+        DOCKER_IMAGE = "rinuaws-debug/jenkins-react" // your DockerHub repo
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/rinuaws3-debug/jenkins-react.git'
+                git branch: 'main', url: 'https://github.com/rinuaws-debug/jenkins-react.git'
             }
         }
 
