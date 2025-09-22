@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "rinuaws-debug/jenkins-react" // your DockerHub repo
+        DOCKER_IMAGE = "rinuaws/jenkins-react" // your DockerHub repo
     }
 
     stages {
@@ -31,6 +31,8 @@ pipeline {
             steps {
                 withDockerRegistry([credentialsId: 'dockerhub-cred', url: '']) {
                     sh 'docker push $DOCKER_IMAGE:$BUILD_NUMBER'
+                    sh 'docker tag $DOCKER_IMAGE:$BUILD_NUMBER $DOCKER_IMAGE:latest'
+                    sh 'docker push $DOCKER_IMAGE:latest'
                 }
             }
         }
