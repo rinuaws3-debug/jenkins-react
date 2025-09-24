@@ -5,7 +5,7 @@ function App() {
     <div className="App">
       {/* 🔹 Navbar */}
       <nav className="navbar">
-        <div className="nav-logo">MyReactApp</div>
+        <div className="nav-logo">EmvigoTech</div>
         <ul className="nav-links">
           <li><a href="#home">Home</a></li>
           <li><a href="#features">Features</a></li>
@@ -16,7 +16,7 @@ function App() {
 
       {/* 🔹 Hero Section */}
       <header className="hero" id="home">
-        <h1>🚀 Welcome to My React App</h1>
+        <h1>Emvigo</h1>
         <p>A clean and modern starting point for your project.</p>
         <button className="cta-button">Get Started</button>
       </header>
