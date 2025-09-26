@@ -9,8 +9,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                     url: 'https://github.com/rinuaws3-debug/jenkins-react.git',
-                     credentialsId: 'github-cred'               
+                    url: 'https://github.com/rinuaws3-debug/jenkins-react.git',
+                    credentialsId: 'github-cred'
             }
         }
 
@@ -37,13 +37,12 @@ pipeline {
             }
         }
 
-         stage('Deploy') {
+        stage('Deploy') {
             steps {
                 sh '''
                   docker rm -f myapp || true
-                  docker run -d -p 8081:80 --name myapp $DOCKER_IMAGE:$BUILD_NUMBER           
-                    """
-                }
+                  docker run -d -p 8081:80 --name myapp $DOCKER_IMAGE:$BUILD_NUMBER
+                '''
             }
         }
     }
