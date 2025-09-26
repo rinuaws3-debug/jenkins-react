@@ -39,15 +39,15 @@ pipeline {
 
         stage('Deploy') {
             steps {
-              sshagent(['ec2-ssh']) {
-            sh '''
-            ssh -o StrictHostKeyChecking=no ubuntu@13.232.101.128 '
-                docker rm -f myapp || true &&
-                docker pull rinuaws/jenkins-react:$BUILD_NUMBER &&
-                docker run -d -p 8081:80 --name myapp rinuaws/jenkins-react:$BUILD_NUMBER
-            '  
-              
-              '''
+                sshagent(['ec2-ssh']) {
+                    sh """
+                    ssh -o StrictHostKeyChecking=no ubuntu@13.232.101.128 '
+                        docker rm -f myapp || true &&
+                        docker pull rinuaws/jenkins-react:$BUILD_NUMBER &&
+                        docker run -d -p 8081:80 --name myapp rinuaws/jenkins-react:$BUILD_NUMBER
+                    '
+                    """
+                }
             }
         }
     }
