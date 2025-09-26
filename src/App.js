@@ -16,7 +16,7 @@ function App() {
 
       {/* 🔹 Hero Section */}
       <header className="hero" id="home">
-        <h1>Emvigo</h1>
+        <h1>Emvigo-test</h1>
         <p>A clean and modern starting point for your project.</p>
         <button className="cta-button">Get Started</button>
       </header>
